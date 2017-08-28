@@ -10,8 +10,15 @@ from api.gateways.query_builder import QueryBuilder
 class ContactGatewayTests(TestCase):
     @patch('api.gateways.contact_gateway.QueryBuilder')
     def test_find_contacts_by_query_segmentation(self, query_builder):
+        segmentation = Segmentation.objects.create(
+            query="""{
+                "and": [
+                    {"column": "state", "operator": "=", "value": "SC", "type": "text"}, 
+                    {"column": "age", "operator": ">", "value": "30", "type": "numeric"}
+                ]
+            }"""
+        )
         query_builder.return_value.to_sql.return_value = "where state = \"SC\" and age > 30"
-        segmentation = Segmentation()
         contact_out_by_state = Contact.objects.create(name="Name 2", email="name2@email.com", age=30, state="RS", position="Software Engineer")
         contact_out_by_age = Contact.objects.create(name="Name 3", email="name3@email.com", age=30, state="SC", position="Software Engineer")
         contact_in = Contact.objects.create(name="Name 1", email="name1@email.com", age=31, state="SC", position="Software Engineer")        
