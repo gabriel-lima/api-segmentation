@@ -8,8 +8,8 @@ class ContactGateway(ContactGatewayInterface):
     @staticmethod
     def find_by_segmentation(segmentation):
         json_query = json.loads(segmentation.query)
-        where = QueryBuilder(json_query).to_sql()
-        
+        where, params = QueryBuilder(json_query).to_sql()
+
         query = f"select * from api_contact {where}"
 
-        return list(Contact.objects.raw(query))
+        return list(Contact.objects.raw(query, params))
