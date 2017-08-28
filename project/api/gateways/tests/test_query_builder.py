@@ -15,18 +15,42 @@ class ComparisonOperatorsTests(TestCase):
         sql = QueryBuilder(json).to_sql()
 
         self.assertEqual("where age = 10", sql)
-
-    def test_not_equal(self):
+    
+    def test_contains(self):
         json = {
-            "column": "age",
-            "type": "numeric",
-            "value": 10,
-            "operator": "!=",
+            "column": "position",
+            "type": "text",
+            "value": "Software",
+            "operator": "contains",
         }
 
         sql = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age != 10", sql)
+        self.assertEqual("where position like \"%Software%\"", sql)
+    
+    def test_starts_with(self):
+        json = {
+            "column": "position",
+            "type": "text",
+            "value": "Software",
+            "operator": "starts with",
+        }
+
+        sql = QueryBuilder(json).to_sql()
+
+        self.assertEqual("where position like \"%Software\"", sql)
+    
+    def test_ends_with(self):
+        json = {
+            "column": "position",
+            "type": "text",
+            "value": "Software",
+            "operator": "ends with",
+        }
+
+        sql = QueryBuilder(json).to_sql()
+
+        self.assertEqual("where position like \"Software%\"", sql)
 
     def test_greater_than(self):
         json = {

@@ -30,7 +30,35 @@ class QueryBuilder(object):
         operator = expression["operator"]
         value = expression["value"]
 
+        self._is_valid_type(type_value, operator)
+
         if type_value == "text":
-            value = f"\"{value}\""
+            if operator == 'contains':
+                operator = 'like'
+                value = f"\"%{value}%\""
+            elif operator == 'starts with':
+                operator = 'like'
+                value = f"\"%{value}\""
+            elif operator == 'ends with':
+                operator = 'like'
+                value = f"\"{value}%\""
+            else:    
+                value = f"\"{value}\""
 
         self.expressions.append(f"{column} {operator} {value}")
+
+    def _is_valid_type(self, type_value, operator):
+        text_operators = ['=', 'contains', 'starts_with', 'ends_with']
+        numeric_operators = ['=', '<', '<=', '>', '>=']
+
+        if type_value == 'text' and operator in text_operators:
+            return True
+        if type_value == 'numeric' and operator in numeric_operators:
+            return True
+
+        return InvalidTypeException(type_value, operator)
+
+
+class InvalidTypeException(Exception):
+    def __init__(self, type_value, operator):
+        self.message = f'Invalid type: {type_value} to operator: {operator}'
