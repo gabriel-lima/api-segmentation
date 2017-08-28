@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+    db:
+      image: mysql:5.7.14
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: app_database
+      volumes:
+        - ./mysql_data:/var/lib/mysql
+      ports:
+        - "3306:3306"
+      tty: true
+      stdin_open: true
+    web:
+      build: .
+      environment:
+        MYSQL_DATABASE: app_database
+        MYSQL_USER: root
+        MYSQL_PASSWORD: root
+        MYSQL_HOST: db
+        MYSQL_PORT: 3306
+      working_dir: /app/project/
+      command: ./manage.py runserver 0.0.0.0:8000
+      ports:
+        - "8000:8000"
+      volumes:
+        - .:/app
+      depends_on:
+        - db
+      tty: true
+      stdin_open: true
