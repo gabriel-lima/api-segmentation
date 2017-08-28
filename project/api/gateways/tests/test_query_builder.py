@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from api.gateways.query_builder import QueryBuilder
+from api.gateways.query_builder import QueryBuilder, InvalidColumnException, InvalidTypeException
 
 
 class ComparisonOperatorsTests(TestCase):
@@ -12,10 +12,11 @@ class ComparisonOperatorsTests(TestCase):
             "operator": "=",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age = 10", sql)
-    
+        self.assertEqual("where age = %s", where)
+        self.assertEqual([10], params)
+
     def test_contains(self):
         json = {
             "column": "position",
@@ -24,33 +25,36 @@ class ComparisonOperatorsTests(TestCase):
             "operator": "contains",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where position like \"%Software%\"", sql)
-    
+        self.assertEqual("where position like %s", where)
+        self.assertEqual(["%Software%"], params)
+
     def test_starts_with(self):
         json = {
             "column": "position",
             "type": "text",
             "value": "Software",
-            "operator": "starts with",
+            "operator": "starts_with",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where position like \"%Software\"", sql)
-    
+        self.assertEqual("where position like %s", where)
+        self.assertEqual(["%Software"], params)
+
     def test_ends_with(self):
         json = {
             "column": "position",
             "type": "text",
             "value": "Software",
-            "operator": "ends with",
+            "operator": "ends_with",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where position like \"Software%\"", sql)
+        self.assertEqual("where position like %s", where)
+        self.assertEqual(["Software%"], params)
 
     def test_greater_than(self):
         json = {
@@ -60,9 +64,10 @@ class ComparisonOperatorsTests(TestCase):
             "operator": ">",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age > 10", sql)
+        self.assertEqual("where age > %s", where)
+        self.assertEqual([10], params)
 
     def test_greater_or_equal_than(self):
         json = {
@@ -72,9 +77,10 @@ class ComparisonOperatorsTests(TestCase):
             "operator": ">=",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age >= 10", sql)
+        self.assertEqual("where age >= %s", where)
+        self.assertEqual([10], params)
 
     def test_less_than(self):
         json = {
@@ -84,9 +90,10 @@ class ComparisonOperatorsTests(TestCase):
             "operator": "<",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age < 10", sql)
+        self.assertEqual("where age < %s", where)
+        self.assertEqual([10], params)
 
     def test_less_or_equal_than(self):
         json = {
@@ -96,9 +103,32 @@ class ComparisonOperatorsTests(TestCase):
             "operator": "<=",
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age <= 10", sql)
+        self.assertEqual("where age <= %s", where)
+        self.assertEqual([10], params)
+
+    def test_sql_injection_on_column(self):
+        json = {
+            "column": "select count(*) from api_contact",
+            "type": "numeric",
+            "value": 10,
+            "operator": ">",
+        }
+
+        with self.assertRaises(InvalidColumnException):
+            QueryBuilder(json).to_sql()
+
+    def test_invalid_operator(self):
+        json = {
+            "column": "age",
+            "type": "numeric",
+            "value": 10,
+            "operator": "!=",
+        }
+
+        with self.assertRaises(InvalidTypeException):
+            QueryBuilder(json).to_sql()
 
 
 class LogicalOperatorsTests(TestCase):
@@ -120,9 +150,10 @@ class LogicalOperatorsTests(TestCase):
             ]
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age > 15 and state = \"SC\"", sql)
+        self.assertEqual("where age > %s and state = %s", where)
+        self.assertEqual([15, "SC"], params)
 
     def test_or(self):
         json = {
@@ -142,6 +173,7 @@ class LogicalOperatorsTests(TestCase):
             ]
         }
 
-        sql = QueryBuilder(json).to_sql()
+        where, params = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age < 30 or name like \"%Name of person%\"", sql)
+        self.assertEqual("where age < %s or name like %s", where)
+        self.assertEqual([30, "%Name of person%"], params)
