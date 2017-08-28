@@ -15,7 +15,7 @@ class ContactsBySegmentationTests(TestCase):
             query="""{
                 "and": [
                     {"column": "state", "operator": "=", "value": "SC", "type": "text"}, 
-                    {"column": "age", "operator": ">", "value": "30", "type": "numeric"}
+                    {"column": "age", "operator": ">", "value": 30, "type": "numeric"}
                 ]
             }"""
         )
