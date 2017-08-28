@@ -17,5 +17,3 @@ class ContactsBySegmentation(View):
         ).execute(segmentation_id)
 
         return presenter.response()
-
-        
