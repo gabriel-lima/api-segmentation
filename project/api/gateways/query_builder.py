@@ -56,7 +56,7 @@ class QueryBuilder(object):
         if type_value == 'numeric' and operator in numeric_operators:
             return True
 
-        return InvalidTypeException(type_value, operator)
+        raise InvalidTypeException(type_value, operator)
 
 
 class InvalidTypeException(Exception):

@@ -137,11 +137,11 @@ class LogicalOperatorsTests(TestCase):
                     "column": "name",
                     "type": "text",
                     "value": "Name of person",
-                    "operator": "like",
+                    "operator": "contains",
                 },
             ]
         }
 
         sql = QueryBuilder(json).to_sql()
 
-        self.assertEqual("where age < 30 or name like \"Name of person\"", sql)
+        self.assertEqual("where age < 30 or name like \"%Name of person%\"", sql)
