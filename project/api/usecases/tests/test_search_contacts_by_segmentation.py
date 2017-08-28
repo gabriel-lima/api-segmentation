@@ -4,7 +4,7 @@ from unittest.mock import create_autospec
 from api.usecases.search_contacts_by_segmentation import SearchContactsBySegmentation
 from api.gateways.interfaces.segmentation_gateway import SegmentationGateway
 from api.gateways.interfaces.contact_gateway import ContactGateway
-from api.presenters.interfaces.contacts_presenter import ContactsPresenter
+from api.presenters.interfaces.contact_presenter import ContactPresenter
 from api.structs.segmentation import Segmentation
 from api.structs.contact import Contact
 
@@ -16,12 +16,12 @@ class SearchContactsBySegmentationTests(TestCase):
     def setUp(self):
         self.segmentation_gateway = create_autospec(SegmentationGateway)
         self.contact_gateway = create_autospec(ContactGateway)
-        self.contacts_presenter = create_autospec(ContactsPresenter)
+        self.contact_presenter = create_autospec(ContactPresenter)
 
         self.usecase = SearchContactsBySegmentation(
             self.segmentation_gateway,
             self.contact_gateway,
-            self.contacts_presenter
+            self.contact_presenter
         )
 
     def test_get_segmentation_by_id(self):
@@ -43,4 +43,4 @@ class SearchContactsBySegmentationTests(TestCase):
 
         self.usecase.execute(SEGMENTATION_ID)
 
-        self.contacts_presenter.show.assert_called_once_with(contacts)
+        self.contact_presenter.show.assert_called_once_with(contacts)
