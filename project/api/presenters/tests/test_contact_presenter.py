@@ -1,8 +1,4 @@
 import json
-from django.http.response import HttpResponse
-from api.presenters.interfaces.contact_presenter import ContactPresenter as ContactPresenterInterface
-
-
 from unittest import TestCase
 from api.presenters.contact_presenter import ContactPresenter
 from api.models import Contact

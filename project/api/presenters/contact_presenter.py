@@ -19,6 +19,7 @@ class ContactPresenter(ContactPresenterInterface):
 
     def response(self):
         return HttpResponse(
-            content=json.dumps(self.content)
+            content=json.dumps(self.content),
+            content_type='application/json'
         )
  
