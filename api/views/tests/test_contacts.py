@@ -43,6 +43,7 @@ class ContactsTests(TestCase):
         )
 
         self.assertEqual(201, response.status_code)
+        self.assertIsNotNone(json.loads(response.content)['id'])
         contact_created = Contact.objects.all()[0] 
         self.assertEqual('Contact 1', contact_created.name)
         self.assertEqual('1@email.com', contact_created.email)

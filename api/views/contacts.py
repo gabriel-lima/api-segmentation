@@ -33,8 +33,14 @@ class Contacts(View):
     
     def post(self, request):
         data = json.loads(request.body)
-        Contact(**data).save()
-        return HttpResponse(status=201)
+        contact = Contact(**data)
+        contact.save()
+        return HttpResponse(
+            status=201, 
+            content=json.dumps({
+                'id': contact.id
+            }),
+            content_type='application/json')
 
     def put(self, request, contact_id):
         data = json.loads(request.body)

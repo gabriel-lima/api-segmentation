@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/gabriel-lima/api-segmentation.svg?branch=master)](https://travis-ci.org/gabriel-lima/api-segmentation)
 
+[![Coverage Status](https://coveralls.io/repos/github/gabriel-lima/api-segmentation/badge.svg?branch=master)](https://coveralls.io/github/gabriel-lima/api-segmentation?branch=master)
+
 # Challenge
 
 See how consuming the API Segmentation through [Doc API](API-DOCUMENTATIO.md) 

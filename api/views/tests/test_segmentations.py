@@ -46,6 +46,7 @@ class SegmentationsTests(TestCase):
         )
 
         self.assertEqual(201, response.status_code)
+        self.assertIsNotNone(json.loads(response.content)['id'])
         segmentation_created = Segmentation.objects.all()[0] 
         self.assertIsNotNone(segmentation_created.id)
         self.assertEqual(str(segmentation_query), segmentation_created.query)

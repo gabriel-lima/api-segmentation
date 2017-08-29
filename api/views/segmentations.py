@@ -25,8 +25,14 @@ class Segmentations(View):
 
     def post(self, request):
         data = json.loads(request.body)
-        Segmentation(**data).save()
-        return HttpResponse(status=201)
+        segmentation = Segmentation(**data)
+        segmentation.save()
+        return HttpResponse(
+            status=201,
+            content=json.dumps({
+                'id': segmentation.id
+            }),
+            content_type='application/json')
 
     def put(self, request, segmentation_id):
         data = json.loads(request.body)
