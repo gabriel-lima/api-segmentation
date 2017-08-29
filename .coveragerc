@@ -1,0 +1,13 @@
+[run]
+branch = False
+
+source =
+    /
+
+omit =
+    /*/tests/*
+
+[report]
+
+[html]
+directory = htmlcov
