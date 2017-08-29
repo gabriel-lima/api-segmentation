@@ -4,7 +4,8 @@
 
 # Challenge
 
-See how consuming the API Segmentation through [Doc API](DOCS.md) 
+This project is a API REST, so you need read how consuming the API Segmentation through [Doc API](DOCS.md).
+I recommend used a tool like [PostMan](https://www.getpostman.com/) to help you consumming it.
 
 ### Prerequisites
 
@@ -33,6 +34,9 @@ Or at folder if installed on local machine, run:
 The application running in `http://localhost:8000`.
 
 ## Running the tests
+
+The application have any layers of tests, with: unit tests, functional tests and integration tests.
+The tests are in any layers of application, each layer have a folder called tests.
 
 To run all tests:
 ```bash
