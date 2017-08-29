@@ -2,6 +2,8 @@
 
 # Challenge
 
+See how consuming the API Segmentation through [Doc API](API-DOCUMENTATIO.md) 
+
 ### Prerequisites
 
 You need have installed python=3.6.2 and MySQL=5.7.14. But, if you want a shortcut to set up this application I created a Docker configuration.
