@@ -12,7 +12,7 @@ You need have installed python=3.6.2 and Postgres=9.6.4. But, if you want a shor
 
 ### Installing
 
-With Docker you need just run:
+With Docker you just need run:
 
 ```
 docker-compose build
@@ -20,12 +20,12 @@ docker-compose build
 
 ### Running server
 
-To run with Docker, you need just:
+To run with Docker:
 ```bash
 docker-compose up -d
 ```
 
-Or at folder /project, run:
+Or at folder if installed on local machine, run:
 ```bash
 ./manage.py runserver
 ```
@@ -51,7 +51,8 @@ Application deployed on Heroku through link: https://rd-station-challenge-api.he
 ## Built With
 
 * [Django](https://www.djangoproject.com/) - The web framework used
-* [MySQL](https://www.mysql.com/) - The database used
+* [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) - The application's architecture
+* [Postgres](https://www.postgresql.org/) - The database used
 * [Travis CI](https://travis-ci.org/) - The Continuos Integration
 * [Docker](https://www.docker.com/) - The container engine used
 * [Heroku](https://www.heroku.com/) - The Clound application plataform
