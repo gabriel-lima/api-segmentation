@@ -7,6 +7,6 @@ RUN pip install -r requirements.txt
 ADD ./project /app/project
 WORKDIR /app/project
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD gunicorn project.wsgi -b 0.0.0.0:8000
+CMD gunicorn project.wsgi -b 0.0.0.0:8080
