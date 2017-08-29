@@ -9,14 +9,22 @@ I recommend used a tool like [PostMan](https://www.getpostman.com/) to help you 
 
 ### Prerequisites
 
-You need have installed python=3.6.2 and Postgres=9.6.4. But, if you want a shortcut to set up this application I created a Docker configuration.
+You need have installed python=3.6.2 and Postgres=9.6.4.
+But, if you want a shortcut to set up this application I created a Docker configuration.
 
 ### Installing
 
 With Docker you just need run:
 
 ```
-docker-compose build
+$ docker-compose build
+```
+
+Or, on local machine:
+```
+$ pip install -r requirements.txt
+$ psql -c "CREATE DATABASE test_app_database;" -U postgres
+$ ./manage.py migrate
 ```
 
 ### Running server
