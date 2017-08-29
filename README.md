@@ -46,7 +46,7 @@ Or:
 
 ## Deployment
 
-Application deployed on Heroku through link: https://rd-station-challenge-rails-app.herokuapp.com/
+Application deployed on Heroku through link: https://rd-station-challenge-api.herokuapp.com/
 
 ## Built With
 
