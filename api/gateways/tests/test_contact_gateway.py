@@ -1,6 +1,7 @@
 from unittest.mock import create_autospec, patch
 
 from django.test import TestCase
+from django.db.utils import DataError
 
 from api.models import Segmentation, Contact
 from api.gateways.contact_gateway import ContactGateway
@@ -26,13 +27,11 @@ class ContactGatewayTests(TestCase):
 
     @patch('api.gateways.contact_gateway.QueryBuilder')
     @patch('api.gateways.contact_gateway.json.loads')
-    def test_sql_injection_on_params(self, _, query_builder):
+    def test_avoid_sql_injection_on_params(self, _, query_builder):
         contact = Contact.objects.create(name="Name 1", email="name1@email.com", age=2, state="SC", position="Software Engineer")
 
         query_builder.return_value.to_sql.return_value = \
             "where age > %s", ["select count(*) from api_contact"]
         
-        contacts = ContactGateway.find_by_segmentation(self.segmentation)
-
-        self.assertEqual(1, len(contacts))
-        self.assertEqual(contact, contacts[0])
+        with self.assertRaises(DataError):
+            contacts = ContactGateway.find_by_segmentation(self.segmentation)
