@@ -102,7 +102,7 @@
 
   * **Code:** 200 <br />
     **Content:** 
-    ````
+    ```
     [
       {
         "name": "Steve",
