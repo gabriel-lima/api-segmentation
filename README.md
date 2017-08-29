@@ -4,7 +4,7 @@
 
 # Challenge
 
-See how consuming the API Segmentation through [Doc API](API-DOCUMENTATIO.md) 
+See how consuming the API Segmentation through [Doc API](DOCS.md) 
 
 ### Prerequisites
 
