@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/gabriel-lima/rd-challenge.svg?branch=master)](https://travis-ci.org/gabriel-lima/rd-challenge)
+[![Build Status](https://travis-ci.org/gabriel-lima/api-segmentation.svg?branch=master)](https://travis-ci.org/gabriel-lima/api-segmentation)
 
 # Challenge
 

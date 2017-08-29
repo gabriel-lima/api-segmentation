@@ -6,6 +6,7 @@ services:
 language: python
 
 script:
+  - ./manage.py migrate
   - ./manage.py test -v=2
 
 after_success:
