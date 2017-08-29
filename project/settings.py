@@ -55,10 +55,9 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.environ.get('MYSQL_DATABASE'),
         'TEST_NAME': 'test_app_database_{0}'.format(uuid.uuid4()),
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'USER': os.environ.get('MYSQL_USER',),
         'PASSWORD': os.environ.get('MYSQL_PASSWORD'),
         'HOST': os.environ.get('MYSQL_HOST'),
