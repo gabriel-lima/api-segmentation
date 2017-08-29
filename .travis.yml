@@ -3,6 +3,18 @@ language: python
 python:
   - "3.6.2"
 
+services: postgresql
+
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  - psql -c "CREATE DATABASE test_app_database;" -U postgres
+  - ./manage.py syncdb --noinput
+
+script:
+  - ./manage.py test
+
 deploy:
   provider: heroku
   api_key:
