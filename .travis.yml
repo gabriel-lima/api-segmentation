@@ -6,8 +6,8 @@ services:
 language: python
 
 script:
-  - ./manage.py migrate
-  - ./manage.py test -v=2
+  - docker-compose run web ./manage.py migrate
+  - docker-compose run web ./manage.py test
 
 after_success:
   - sh ./deploy_dockerhub.sh
