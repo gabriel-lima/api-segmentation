@@ -8,7 +8,7 @@ See how consuming the API Segmentation through [Doc API](DOCS.md)
 
 ### Prerequisites
 
-You need have installed python=3.6.2 and MySQL=5.7.14. But, if you want a shortcut to set up this application I created a Docker configuration.
+You need have installed python=3.6.2 and Postgres=9.6.4. But, if you want a shortcut to set up this application I created a Docker configuration.
 
 ### Installing
 
