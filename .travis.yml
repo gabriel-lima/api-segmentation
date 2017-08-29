@@ -1,0 +1,13 @@
+sudo: required
+
+services:
+  - docker
+
+language: python
+
+script:
+  - ./manage.py test -v=2
+
+after_success:
+  - sh ./deploy_dockerhub.sh
+  - test "$TRAVIS_BRANCH" = "master" && sh ./deploy_heroku.sh
