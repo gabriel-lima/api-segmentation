@@ -8,6 +8,9 @@ services: postgresql
 install:
   - pip install -r requirements.txt
 
+env:
+  - DATABASE_URL=postgres://postgres@localhost:5432/test_app_database
+
 before_script:
   - psql -c "CREATE DATABASE test_app_database;" -U postgres
   - ./manage.py migrate

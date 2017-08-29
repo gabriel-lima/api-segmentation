@@ -51,11 +51,3 @@ Application deployed on Heroku through link: https://rd-station-challenge-rails-
 * [Travis CI](https://travis-ci.org/) - The Continuos Integration
 * [Docker](https://www.docker.com/) - The container engine used
 * [Heroku](https://www.heroku.com/) - The Clound application plataform
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
-## Acknowledgments
-
-[Creating a new Rails application project with Docker](https://github.com/IcaliaLabs/guides/wiki/Creating-a-new-Rails-application-project-with-Docker)
