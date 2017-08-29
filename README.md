@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/gabriel-lima/api-segmentation.svg?branch=master)](https://travis-ci.org/gabriel-lima/api-segmentation)
 
-[![Coverage Status](https://coveralls.io/repos/github/gabriel-lima/api-segmentation/badge.svg?branch=master)](https://coveralls.io/github/gabriel-lima/api-segmentation?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/gabriel-lima/api-segmentation/badge.svg)](https://coveralls.io/github/gabriel-lima/api-segmentation)
 
 # Challenge
 
