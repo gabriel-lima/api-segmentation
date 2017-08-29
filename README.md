@@ -30,13 +30,13 @@ $ ./manage.py migrate
 ### Running server
 
 To run with Docker:
-```bash
-docker-compose up -d
+```
+$ docker-compose up -d
 ```
 
 Or at folder if installed on local machine, run:
-```bash
-./manage.py runserver
+```
+$ ./manage.py runserver
 ```
 
 The application running in `http://localhost:8000`.
@@ -47,13 +47,13 @@ The application have any layers of tests, with: unit tests, functional tests and
 The tests are in any layers of application, each layer have a folder called tests.
 
 To run all tests:
-```bash
-docker-compose run --rm web ./manage.py test -v2
+```
+$ docker-compose run --rm web ./manage.py test -v2
 ```
 
 Or:
-```bash
-./manage.py test -v2
+```
+$ ./manage.py test -v2
 ```
 
 ## Deployment
