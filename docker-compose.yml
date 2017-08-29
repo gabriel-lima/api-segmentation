@@ -2,25 +2,23 @@ version: "3"
 
 services:
     db:
-      image: mysql:5.7.14
+      restart: always
+      image: postgres:9.6.4
       environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: app_database
+        POSTGRES_USER: root
+        POSTGRES_PASSWORD: toor
+        POSTGRES_DB: app_database
       volumes:
-        - ./mysql_data:/var/lib/mysql
+        - ./postgres-data:/var/lib/postgresql/data
       ports:
-        - "3307:3306"
+        - "5433:5432"
       tty: true
       stdin_open: true
     web:
       build: .
       environment:
-        MYSQL_DATABASE: app_database
-        MYSQL_USER: root
-        MYSQL_PASSWORD: root
-        MYSQL_HOST: db
-        MYSQL_PORT: 3306
-      working_dir: /app/project/
+        DATABASE_URL: postgres://root:toor@db:5432/app_database
+      working_dir: /app
       command: ./manage.py runserver 0.0.0.0:8000
       ports:
         - "8000:8000"
